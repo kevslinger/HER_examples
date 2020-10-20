@@ -42,7 +42,7 @@ for model in model_list:
 
     model.learn(100000)#, callback=TensorboardCallback())
 
-    model_path = './her_bit_env_' + model_str
+    model_path = './models/her_bit_env_' + model_str
     model.save(model_path)
 
 model = HER.load(model_path, env=env)
