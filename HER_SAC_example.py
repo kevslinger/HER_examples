@@ -15,7 +15,7 @@ class TensorboardCallback(BaseCallback):
         self.is_tb_set = False
         super(TensorboardCallback, self).__init__(verbose)
 
-    def _on_step(self) --> bool:
+    def _on_step(self) -> bool:
         # Log additional Tensor
         if not self.is_tb_set:
             with self.model.graph.as_default():
