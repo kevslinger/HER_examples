@@ -36,7 +36,7 @@ env = BitFlippingEnv(8, continuous=model_class, max_steps=8)
 
 goal_selection_strategy = 'final'
 
-model = HER('MlpPolicy', env, model_class, n_sampled_goal=4, goal_selection_strategy=goal_selection_strategy, verbose=1)
+model = HER('MlpPolicy', env, model_class, n_sampled_goal=4, goal_selection_strategy=goal_selection_strategy, tensorboard_log='/tmp/her_sac', verbose=1)
 
 model.learn(1000, callback=TensorboardCallback())
 
