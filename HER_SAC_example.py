@@ -44,6 +44,8 @@ model.save('./her_bit_env_sac')
 
 model = HER.load('./her_bit_env_sac', env=env)
 
+
+obs = env.reset()
 for _ in range(100):
     action, _ = model.predict(obs)
     obs, reward, done, _ = env.step(action)
