@@ -38,7 +38,7 @@ goal_selection_strategy = 'final'
 
 model = HER('MlpPolicy', env, model_class, n_sampled_goal=4, goal_selection_strategy=goal_selection_strategy, tensorboard_log='./logs/her_td3', verbose=1)
 
-model.learn(100000, callback=TensorboardCallback())
+model.learn(100000)#, callback=TensorboardCallback())
 
 model_path = './her_bit_env_td3'
 model.save(model_path)
