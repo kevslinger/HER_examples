@@ -3,7 +3,7 @@
 import tensorflow as tf
 import numpy as np
 
-from stable_baselines import HER, SAC, DQN, TD3
+from stable_baselines import HER, SAC, DQN, TD3, DDPG
 from stable_baselines.her import GoalSelectionStrategy, HERGoalEnvWrapper
 from stable_baselines.common.bit_flipping_env import BitFlippingEnv
 from stable_baselines.common.callbacks import BaseCallback
@@ -30,17 +30,19 @@ class TensorboardCallback(BaseCallback):
 
 
 
-model_class = TD3
+model_list = [SAC, TD3, DDPG, DQN]
+for model in model_list:     
+    model_class = model
+    model_str = str(model_class)[-6:-2].strip('.')
+    env = BitFlippingEnv(8, continuous=model_class, max_steps=8)
 
-env = BitFlippingEnv(8, continuous=model_class, max_steps=8)
+    goal_selection_strategy = 'final'
 
-goal_selection_strategy = 'final'
-
-model = HER('MlpPolicy', env, model_class, n_sampled_goal=4, goal_selection_strategy=goal_selection_strategy, tensorboard_log='./logs/her_td3', verbose=1)
+    model = HER('MlpPolicy', env, model_class, n_sampled_goal=4, goal_selection_strategy=goal_selection_strategy, tensorboard_log='./logs/conglomerate/' + model_str, verbose=1)
 
 model.learn(100000)#, callback=TensorboardCallback())
 
-model_path = './her_bit_env_td3'
+model_path = './her_bit_env_' + model_str
 model.save(model_path)
 
 model = HER.load(model_path, env=env)
