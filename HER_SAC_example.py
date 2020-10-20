@@ -4,7 +4,7 @@ import tensorflow as tf
 import numpy as np
 
 from stable_baselines import HER, SAC
-from stable_baselines.HER import GoalSelectionStrategy, HERGOalEnvWrapper
+from stable_baselines.her import GoalSelectionStrategy, HERGOalEnvWrapper
 from stable_baselines.common.bit_flipping_env import BitFlippingEnv
 from stable_baselines.common.callbacks import BaseCallback
 
