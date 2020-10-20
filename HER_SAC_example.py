@@ -30,7 +30,7 @@ class TensorboardCallback(BaseCallback):
 
 
 
-model_list = [TD3]#[SAC, TD3, DDPG]#, DQN]
+model_list = [DDPG]#[SAC, TD3, DDPG]#, DQN]
 for model in model_list:     
     model_class = model
     model_str = str(model_class)[-6:-2].strip('.')
