@@ -30,7 +30,7 @@ class TensorboardCallback(BaseCallback):
 
 
 
-model_list = [SAC, TD3, DDPG, DQN]
+model_list = [SAC, TD3, DDPG]#, DQN]
 for model in model_list:     
     model_class = model
     model_str = str(model_class)[-6:-2].strip('.')
@@ -40,10 +40,10 @@ for model in model_list:
 
     model = HER('MlpPolicy', env, model_class, n_sampled_goal=4, goal_selection_strategy=goal_selection_strategy, tensorboard_log='./logs/conglomerate/' + model_str, verbose=1)
 
-model.learn(100000)#, callback=TensorboardCallback())
+    model.learn(100000)#, callback=TensorboardCallback())
 
-model_path = './her_bit_env_' + model_str
-model.save(model_path)
+    model_path = './her_bit_env_' + model_str
+    model.save(model_path)
 
 model = HER.load(model_path, env=env)
 
