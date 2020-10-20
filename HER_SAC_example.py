@@ -7,7 +7,7 @@ from stable_baselines import HER, SAC, DQN, TD3, DDPG
 from stable_baselines.her import GoalSelectionStrategy, HERGoalEnvWrapper
 from stable_baselines.common.bit_flipping_env import BitFlippingEnv
 from stable_baselines.common.callbacks import BaseCallback
-
+from gym.envs import robotics
 
 
 class TensorboardCallback(BaseCallback):
@@ -38,7 +38,7 @@ for model in model_list:
 
     goal_selection_strategy = 'final'
 
-    model = HER('MlpPolicy', 'FetchReach-v1', model_class, n_sampled_goal=4, goal_selection_strategy=goal_selection_strategy, tensorboard_log='./logs/conglomerate_FetchReach/' + model_str, verbose=1)
+    model = HER('MlpPolicy', robotics.FetchReachEnv, model_class, n_sampled_goal=4, goal_selection_strategy=goal_selection_strategy, tensorboard_log='./logs/conglomerate_FetchReach/' + model_str, verbose=1)
 
     model.learn(100000)#, callback=TensorboardCallback())
 
