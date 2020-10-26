@@ -13,15 +13,16 @@ import highway_env
 
 def main():
     model_list = [SAC, TD3]#, DDPG]#, DQN]
-    env_string_list = ['FetchReach-v1', 'parking-v0']#'FetchPush-v1']
+    env_string_list = ['FetchReach-v1', 'parking-v0', 'FetchPush-v1']
     env_list = [gym.make(env_string) for env_string in env_string_list]
-    #env_string_list += ['BitFlippingEnv'] * 2
-    #env_list += [BitFlippingEnv(40, continuous=model, max_steps=40 ) for model in model_list]
+    env_string_list += ['BitFlippingEnv'] * 2
+    env_list += [BitFlippingEnv(40, continuous=model, max_steps=40 ) for model in model_list]
     goal_selection_strategy = 'future'
     #print(env_list)
     #print(env_string_list)
-    for model in model_list:
+    for m in model_list:
         for env_string, env in zip(env_string_list, env_list):
+            model = m
             model_str = str(model)[-6:-2].strip('.')
 
             if model == SAC:
